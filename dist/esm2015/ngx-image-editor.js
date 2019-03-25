@@ -117,6 +117,7 @@ class NgxImageEditorComponent {
             });
             this.cropper.getCroppedCanvas({ fillColor: this.canvasFillColor }).toBlob((blob) => {
                 this.blob = blob;
+                updateImage();
             });
             this.zoomIn = 1;
             this.loading = false;
@@ -128,6 +129,7 @@ class NgxImageEditorComponent {
     undoCrop() {
         this.croppedImage = null;
         this.blob = null;
+        updateImage();
         setTimeout(() => {
             this.initializeCropper();
         }, 100);
@@ -136,6 +138,12 @@ class NgxImageEditorComponent {
      * @return {?}
      */
     saveImage() {
+        updateImage();
+    }
+    /**
+     * @return {?}
+     */
+    updateImage() {
         this.file.emit(new File([this.blob], this.state.ImageName, { type: this.state.ImageType }));
     }
     /**

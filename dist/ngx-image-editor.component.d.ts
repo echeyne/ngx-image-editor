@@ -30,6 +30,7 @@ export declare class NgxImageEditorComponent implements AfterViewInit, OnInit, O
     handleCrop(): void;
     undoCrop(): void;
     saveImage(): void;
+    updateImage(): void;
     private initializeCropper();
     setRatio(value: any): void;
     zoomChange(input: any, zoom?: string): void;

@@ -408,6 +408,7 @@ export class NgxImageEditorComponent implements AfterViewInit, OnInit, OnDestroy
       });
       this.cropper.getCroppedCanvas({fillColor: this.canvasFillColor}).toBlob((blob: Blob) => {
         this.blob = blob;
+        this.updateImage();
       });
       this.zoomIn  = 1;
       this.loading = false;
@@ -417,6 +418,7 @@ export class NgxImageEditorComponent implements AfterViewInit, OnInit, OnDestroy
   public undoCrop() {
     this.croppedImage = null;
     this.blob         = null;
+    this.updateImage();
     setTimeout(() => {
       this.initializeCropper();
     }, 100);
@@ -424,6 +426,10 @@ export class NgxImageEditorComponent implements AfterViewInit, OnInit, OnDestroy
   }
 
   public saveImage() {
+    this.updateImage();
+  }
+
+  public updateImage() {
     this.file.emit(new File([this.blob], this.state.ImageName, {type: this.state.ImageType}));
   }
 
